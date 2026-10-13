@@ -1,0 +1,63 @@
+# HydraHunt Portfolio License
+
+Copyright (c) 2026 Youssef Atwa (https://github.com/YAtwa7)
+
+A permissive license modelled on the MIT License, with one added restriction:
+**the Work may not be used for commercial purposes.**
+
+This is not an OSI-approved license.
+
+## Why this exists
+
+HydraHunt is published as a portfolio piece and as a starting point for other
+people's own job-search tooling. You are welcome to read it, learn from it, fork
+it and adapt it. It is not a product, and it is not offered for sale.
+
+## Definitions
+
+**"the Work"** — this repository and everything in it: source code,
+configuration, documentation and assets.
+
+**"Commercial Use"** — any use of the Work, or of any part or derivative of it,
+intended to derive commercial advantage or monetary compensation. That includes,
+without limitation:
+
+- selling, licensing or sublicensing the Work, in original or modified form
+- incorporating the Work into a product or service offered to third parties for
+  a fee or on a subscription
+- using the Work to deliver paid work, including paid consulting or contract
+  services built on it
+- operating a hosted or managed service whose value derives from the Work
+
+Personal use, study, evaluation, and unpaid hobby or portfolio projects are **not**
+Commercial Use.
+
+## Grant
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+the Work, to deal in the Work without restriction, including without limitation
+the rights to use, copy, modify, merge, publish and redistribute the Work, and to
+create derivative works of it, **provided that**:
+
+1. This license and the above notice are included in all copies or substantial
+   portions of the Work.
+2. The Work is not used for Commercial Use.
+3. Derivative works carry this same restriction.
+
+## No warranty
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE
+USE OR OTHER DEALINGS IN THE WORK.
+
+## A note on this license
+
+This license has not been reviewed by OSI and is not a standard license. Terms
+like "commercial advantage" are inherently a matter of judgement and will need
+to be interpreted by a court in your jurisdiction if they are ever disputed. It
+is fine for a portfolio project; if the distinction between commercial and
+non-commercial use ever actually matters to you, get it reviewed by a lawyer, or
+switch to the MIT License and accept that it permits commercial use.
