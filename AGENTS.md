@@ -11,13 +11,12 @@
 
 - **Memory = the repo.** A session is closable the moment `git push` succeeds
   and docs are honest.
-- **Read-chain for every new session:** AGENTS.md → `docs/HANDOFF.md` (the NOW)
-  → `docs/ROADMAP.md` (done/next/later) → `docs/SUGGESTIONS.md` (idea inbox)
-  → `docs/MEMORY.md` (the WHY) → `git log --oneline -10`.
+- **Read-chain for every new session:** AGENTS.md → `docs/ARCHITECTURE.md` (how it
+  fits together) → `docs/ROADMAP.md` (done/next/later) → `git log --oneline -10`.
 - **Roles:** MAIN (hub: status, dispatch, docs ownership) · BUILDER-<item>
   (one roadmap item per session, then dies) · QA-PROVER (review-only,
   brief in `docs/PROVER.md`).
-- **Triggers:** user says **"rotate"** → flush HANDOFF + ROADMAP, push,
+- **Triggers:** user says **"rotate"** → flush ROADMAP, push,
   list open loops, session closable. User says **"status"** → report from
   files only. Agent says **"rotation due"** when re-asking proven facts.
 - **Docs go direct-to-main; code goes branch → PR → QA-PROVER → merge.**
@@ -163,10 +162,10 @@ Agnes keys. Never commit `.env`. OpenRouter free models ROTATE — refresh with
 | API docs | http://127.0.0.1:8420/docs |
 | Logs | `logs/hydrahunt.log` |
 | DB | `data/jobhunt.db` (sqlite, WAL) |
-| NOW state | `docs/HANDOFF.md` |
+| NOW state | `docs/ROADMAP.md` |
 | Backlog | `docs/ROADMAP.md` |
-| Long memory (WHY) | `docs/MEMORY.md` |
-| Idea inbox | `docs/SUGGESTIONS.md` |
+| Architecture | `docs/ARCHITECTURE.md` |
+| Ask grounding brief | `docs/REPO_BRIEF.md` |
 | Reviewer brief | `docs/PROVER.md` |
 | Postmortems | INCIDENTS.md |
 | History | CHANGELOG.md + GitHub Releases |

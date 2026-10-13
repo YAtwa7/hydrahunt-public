@@ -31,7 +31,7 @@
   Draft modal portalled out of `.card` (hover-flicker), reusable answer bank
   (`/api/answers`), `scripts/rescore_pool.py`, CI fixed (`pythonpath` + hermetic draft
   tests) (23 → 8 visible)
-- [x] docs/ context suite (AGENTS/HANDOFF/ROADMAP/SUGGESTIONS/MEMORY/PROVER)
+- [x] docs/ context suite (AGENTS/ARCHITECTURE/REPO_BRIEF/ROADMAP/PROVER)
 
 ## Next (priority order, MoSCoW)
 
