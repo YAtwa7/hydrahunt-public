@@ -52,6 +52,16 @@ export async function updateCompany(id, patch) {
   return jsonOrThrow(await fetch(`${base}/api/companies/${id}?${q}`, { method: 'PATCH' }))
 }
 
+export async function askQuestion(question) {
+  return jsonOrThrow(
+    await fetch(`${base}/api/ask`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question }),
+    }),
+  )
+}
+
 export function logoUrl(company) {
   const slug = (company || '').toLowerCase().replace(/[^a-z0-9]/g, '')
   return slug ? `https://logo.clearbit.com/${slug}.com` : null

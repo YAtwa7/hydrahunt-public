@@ -95,3 +95,15 @@ discord:
 dashboard:
   auto_open: false
   company_logos: clearbit    # clearbit logo API, favicon fallback
+# ----------------------------------------------------------
+# ASK HYDRAHUNT - grounded Q&A about this codebase
+# Reuses the llm.providers chain above. Nothing is stored.
+# The server binds 127.0.0.1, so this is local-only unless you
+# deliberately change app.host.
+# ----------------------------------------------------------
+ask:
+  enabled: true
+  max_context_chars: 14000   # cap on docs/REPO_BRIEF.md loaded as grounding
+  max_models: 3               # models tried per provider before giving up
+  rate_limit_calls: 20       # per window, in-process
+  rate_limit_window_s: 3600

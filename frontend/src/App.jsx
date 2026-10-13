@@ -5,6 +5,7 @@ import StatsBar from './components/StatsBar'
 import ScanIndicator from './components/ScanIndicator'
 import CompaniesPanel from './components/CompaniesPanel'
 import DorkLabPanel from './components/DorkLabPanel'
+import AskPanel from './components/AskPanel'
 
 const TIERS = ['', 'A', 'B', 'C']
 const STATUSES = ['', 'new', 'viewed', 'applied', 'interview', 'offer', 'rejected', 'hidden']
@@ -97,6 +98,12 @@ export default function App() {
           >
             DorkLab
           </button>
+          <button
+            className={tab === 'ask' ? 'tab active' : 'tab'}
+            onClick={() => setTab('ask')}
+          >
+            Ask
+          </button>
         </nav>
         <button className="scan-btn" onClick={handleScan} disabled={scan?.running}>
           {scan?.running ? '⏳ Scanning…' : '▶ Run Scan'}
@@ -149,6 +156,8 @@ export default function App() {
         </>
       ) : tab === 'companies' ? (
         <CompaniesPanel />
+      ) : tab === 'ask' ? (
+        <AskPanel />
       ) : (
         <DorkLabPanel />
       )}

@@ -240,3 +240,49 @@ body {
 .btn.small { padding: 3px 8px; font-size: 0.75rem; }
 .muted { color: var(--muted); }
 .muted.small { font-size: 0.78rem; }
+
+/* ---- Ask HydraHunt ---- */
+.ask-panel { max-width: 820px; margin: 0 auto; }
+.ask-head h2 { margin: 0 0 6px; font-size: 1.15rem; }
+.ask-sub { margin: 0 0 14px; color: var(--muted); font-size: 0.85rem; }
+.ask-sub code, .ask-foot code {
+  background: var(--panel-2); padding: 1px 5px; border-radius: 4px; font-size: 0.8em;
+}
+.ask-suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip-btn {
+  background: var(--panel); border: 1px solid var(--border); color: var(--text);
+  border-radius: 999px; padding: 7px 14px; font-size: 0.82rem; cursor: pointer;
+  font-family: inherit; text-align: left;
+}
+.chip-btn:hover { border-color: var(--accent); color: var(--accent); }
+.ask-log {
+  display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px;
+  max-height: 56vh; overflow-y: auto; padding-right: 4px;
+}
+.bubble-row { display: flex; }
+.bubble-row.user { justify-content: flex-end; }
+.bubble {
+  max-width: 82%; padding: 10px 13px; border-radius: var(--radius);
+  background: var(--panel); border: 1px solid var(--border); font-size: 0.9rem;
+}
+.bubble-row.user .bubble { background: var(--panel-2); border-color: var(--accent); }
+.bubble.typing { color: var(--muted); font-style: italic; }
+.ask-answer {
+  margin: 0; white-space: pre-wrap; word-break: break-word;
+  font-family: inherit; font-size: 0.9rem; line-height: 1.55;
+}
+.bubble-model { margin-top: 6px; color: var(--muted); font-size: 0.72rem; }
+.ask-input { display: flex; gap: 8px; }
+.ask-input input {
+  flex: 1; background: var(--panel); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px; padding: 10px 12px;
+  font-family: inherit; font-size: 0.9rem;
+}
+.ask-input input:focus { outline: none; border-color: var(--accent); }
+.ask-input button {
+  background: var(--accent); color: #1b1e24; border: none; border-radius: 8px;
+  padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer;
+  font-family: inherit;
+}
+.ask-input button:disabled { opacity: 0.45; cursor: not-allowed; }
+.ask-foot { margin: 10px 0 0; color: var(--muted); font-size: 0.78rem; }

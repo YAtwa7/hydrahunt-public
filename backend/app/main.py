@@ -23,8 +23,9 @@ from typing import Any
 import uvicorn
 from fastapi import FastAPI, Query
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
-from app import __version__
+from app import __version__, ask
 from app.config import ROOT, load_config
 from app.db import init_db
 
@@ -431,6 +432,19 @@ def stats() -> dict:
 def answers() -> list[dict]:
     """Reusable, evidence-bounded application answers from the profile."""
     return load_config().profile.get("answers", [])
+
+
+class AskBody(BaseModel):
+    question: str
+
+
+@app.post("/api/ask")
+def ask_question(body: AskBody) -> dict:
+    """Grounded Q&A about this codebase (Ask HydraHunt).
+
+    Reuses the free-model chain used for scoring. Never stores anything.
+    """
+    return ask.ask(body.question, load_config())
 
 
 def find_free_port(preferred: int, host: str, attempts: int = 10) -> int:
