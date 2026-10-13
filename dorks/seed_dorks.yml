@@ -1,0 +1,73 @@
+# ============================================================
+# DORKLAB — seed dorks (generation 0)
+# The evolution engine mutates/crosses these weekly based on yield.
+# fitness = new_valid_jobs / total_results (updated after each run)
+# ============================================================
+
+dorks:
+  # --- Job postings on ATS platforms ---
+  - id: seed-001
+    query: 'site:boards.greenhouse.io ("QA Engineer" OR "Quality Engineer") remote'
+    family: ats
+    fitness: 0.0
+    generation: 0
+  - id: seed-002
+    query: 'site:jobs.lever.co ("QA" OR "SDET" OR "Quality Assurance") (remote OR "anywhere")'
+    family: ats
+    fitness: 0.0
+    generation: 0
+  - id: seed-003
+    query: 'site:ashbyhq.com ("QA Engineer" OR "Test Engineer") remote'
+    family: ats
+    fitness: 0.0
+    generation: 0
+
+  # --- Email-apply hidden market ---
+  - id: seed-101
+    query: '("QA Engineer" OR "SDET") ("send your resume" OR "email your CV" OR "apply by email") remote'
+    family: email_apply
+    fitness: 0.0
+    generation: 0
+  - id: seed-102
+    query: '("quality assurance" OR "test engineer") hiring ("email us" OR "send us your") -recruiter -agency'
+    family: email_apply
+    fitness: 0.0
+    generation: 0
+
+  # --- People signals: founders/leads/recruiters announcing ---
+  - id: seed-201
+    query: 'site:linkedin.com/posts ("I''m hiring" OR "we''re hiring" OR "join my team") (QA OR SDET OR "quality assurance")'
+    family: linkedin_posts
+    fitness: 0.0
+    generation: 0
+  - id: seed-202
+    query: 'site:x.com ("hiring" OR "we''re looking for") ("QA engineer" OR "test engineer" OR SDET) remote'
+    family: x_posts
+    fitness: 0.0
+    generation: 0
+  - id: seed-203
+    query: 'site:linkedin.com/posts (CTO OR "head of engineering" OR founder) ("growing the team" OR "expanding") (QA OR testing)'
+    family: linkedin_posts
+    fitness: 0.0
+    generation: 0
+
+  # --- Notion career pages ---
+  - id: seed-301
+    query: 'site:notion.site ("we''re hiring" OR "join us" OR "open roles") (QA OR "quality assurance" OR "test engineer")'
+    family: notion
+    fitness: 0.0
+    generation: 0
+
+  # --- Funding/expansion signals ---
+  - id: seed-401
+    query: '(startup raises OR "funding round" OR "Series A" OR "Series B") (devtools OR "testing platform" OR "AI") 2026'
+    family: funding
+    fitness: 0.0
+    generation: 0
+
+  # --- GenAI-testing niche (your edge) ---
+  - id: seed-501
+    query: '("LLM evaluation" OR "AI quality" OR "GenAI testing" OR "model evaluation") (engineer OR specialist) (remote OR hiring)'
+    family: niche
+    fitness: 0.0
+    generation: 0

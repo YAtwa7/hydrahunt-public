@@ -1,0 +1,276 @@
+# ============================================================
+# CANDIDATE PROFILE (EXAMPLE DATA)
+# This drives ALL matching, scoring, and salary estimation.
+# Edit freely; the pipeline reads this fresh on every scan.
+#
+# The values shipped here are a worked example, not a real
+# person's CV. Copy this file to `profile/cv_profile.local.yml`
+# (gitignored) and point JOBHUNT_PROFILE at it to keep a real
+# profile out of version control.
+# ============================================================
+
+identity:
+  name: "Example Candidate"
+  headline: Software QA Engineer
+  location: Egypt
+  open_to_relocation: true
+  years_experience: 4          # selling as 4+
+  seniority_band: [mid, senior]
+  max_required_years: 7        # JDs demanding more than this = out of bounds
+
+languages:
+  - { lang: english, level: fluent }
+
+# ----------------------------------------------------------
+# TARGET ROLES — title regex matched against job titles
+# ----------------------------------------------------------
+# SOFTWARE QA only. NOT manufacturing/hardware QA, NOT call-center/CX QA,
+# NOT automation-focused roles (SDET = automation engineer = rejected).
+target_titles:
+  - "QA Engineer"
+  - "Quality Assurance Engineer"
+  - "Software QA Engineer"
+  - "Manual QA"
+  - "Software Test Engineer"
+  - "Test Engineer"
+  - "Test Analyst"
+  - "QA Tester"
+  - "Software Tester"
+  - "Application Tester"
+  - "Software Quality Engineer"
+  - "Quality Engineer"
+  - "AI Quality Engineer"
+  - "LLM Quality"
+  - "GenAI Test"
+  - "QA Lead"
+  - "QA Analyst"          # lower weight
+title_blocklist:            # hard reject even if matched
+  # automation-focused titles — an SDET is an automation engineer
+  - "SDET"
+  - "QA Automation"
+  - "Automation QA"
+  - "Automation Engineer"
+  - "Test Automation"
+  - "Automation Tester"
+  - "Test Infrastructure"
+  - "Test Infra"
+  # non-software QA domains
+  - "Manufacturing"
+  - "Hardware"
+  - "Linux"
+  - "IoT"
+  - "Kernel"
+  - "Embedded"
+  - "Firmware"
+  - "Network"
+  # supply-chain / vendor quality — not software QA
+  - "Supplier Quality"
+  - "Supplier QA"
+  - "Vendor Quality"
+  - "SQE"                   # Supplier Quality Engineer
+  # industrial / construction / manufacturing QA — NOT software QA
+  - "QA/QC"
+  - "QAQC"
+  - "QC Engineer"
+  - "Product Quality Engineer"
+  - "Incoming Quality"
+  - "Water Leak"
+  - "Facade"
+  - "Bridges"
+  - "Construction"
+  - "Commissioning"
+  # compliance / operational QA (audit-style "assurance" & pharma/manufacturing ops)
+  - "Quality Assurance Officer"
+  - "Quality Assurance Operational"
+  - "Quality Assurance Coordinator"
+  - "Quality Assurance Team Leader"
+  - "Quality Assurance Intern"
+  - "Operational Specialist"
+  - "Test Technology"
+  # regulatory / pharma / medical-device QA
+  - "Regulatory"
+  - "Regulatory Affairs"
+  - "Compliance"
+  - "Medical Device"
+  - "Pharmacovigilance"
+  - "GMP"
+  - "Pharma"
+  # Portuguese-language QA titles (LATAM boards)
+  - "Analista"
+  # industrial / heavy-industry test engineering — not software QA
+  - "Nuclear"
+  # data-annotation / AI-training gig work — not software QA
+  - "AI Trainer"
+  # call-center / CX quality
+  - "Call Center"
+  - "Customer Experience"
+  - "CX QA"
+  - "Customer Support"
+  # too managerial
+  - "QA Manager"
+  - "Director"
+  - "VP "
+
+# ----------------------------------------------------------
+# SKILLS — weighted. must_have present in CV = evidence.
+# Scoring compares job requirements against these.
+# ----------------------------------------------------------
+skills:
+  core:                     # strongest evidence, weight 3
+    - manual testing
+    - functional testing
+    - regression testing
+    - e2e testing
+    - test strategy
+    - api testing
+    - mobile testing
+    - bug triage
+    - release readiness
+  niche:                    # GenAI/ML testing — market edge, weight 4
+    - genai testing
+    - llm testing
+    - behavioral testing
+    - metamorphic testing
+    - hallucination detection
+    - adversarial testing
+    - prompt testing
+    - ai model evaluation
+  automation:               # weight 2 — not a hard requirement
+    - playwright
+    - appium
+    - restassured
+    - python
+    - javascript
+    - java
+    - kotlin
+    - selenium              # knows ecosystem, not primary
+  tools:                    # weight 1.5
+    - postman
+    - proxyman
+    - charles proxy
+    - jira
+    - linear
+    - git
+    - github
+    - sql
+    - kibana
+    - datadog
+    - sentry
+    - aws
+    - kafka
+  practices:                # weight 1
+    - agile
+    - scrum
+    - bdd
+    - tdd
+    - risk-based testing
+    - shift-left
+
+# ----------------------------------------------------------
+# AUTOMATION PREFERENCE
+# Rank: none > plus > open_to_learn > required
+# ----------------------------------------------------------
+automation_preference:
+  none: 1.0                 # manual-focused roles = top tier
+  plus: 0.85                # "automation a plus"
+  open_to_learn: 0.7        # required but learnable (has Playwright/Appium base)
+  required: 0.4             # heavy automation roles — now EXCLUDED (automation_dominant)
+
+# ----------------------------------------------------------
+# LOCATION RULES
+# ----------------------------------------------------------
+location:
+  base_country: Egypt
+  excluded_regions:          # hard reject if job requires being based here
+    - India
+    - Pakistan
+    - Bangladesh
+    - Israel
+  acceptable_tags:           # location feasibility tags we accept
+    - ANYWHERE               # work from anywhere
+    - EMEA_OK                # remote EMEA (UTC+2 is in range)
+    - EGYPT_LISTED
+    - RELOCATION             # offers relocation/visa
+  timezone: "UTC+2"
+  timezone_flexibility:
+    accepted: [americas, emea]          # US + EU hours are fine
+    conditional: [apac]                 # Asian hours only if pay/company is great
+  employment_types: [full_time, part_time, contract, freelance]  # side jobs welcome
+
+# ----------------------------------------------------------
+# SALARY (seeds the estimator)
+# ----------------------------------------------------------
+salary:
+  currencies: [USD, EUR, GBP, EGP]   # main display set
+  floor_usd: 1500            # absolute minimum monthly (USD-equivalent)
+  target_max_usd: null       # no maximum
+  target_min_usd: 2500
+  previous_usd: 3000
+  engagement_types: [b2b_contractor, eor, full_time_remote, part_time]
+
+# per-company score multipliers (0-1) for deprioritizing without blacklisting
+company_weights: {}
+
+# ----------------------------------------------------------
+# ACHIEVEMENTS — the ONLY facts drafters/scorers may cite
+# (auditable source of truth for the evidence-bounded doctrine)
+# ----------------------------------------------------------
+# EXAMPLE entries — replace with your own verifiable facts. Nothing the
+# drafter emits should not be traceable to a line in this list.
+achievements:
+  - "Led end-to-end QA across three squads; drove adoption of a unified testing workflow"
+  - "Diagnosed a multi-agent orchestration bottleneck in a GenAI product, cutting response latency ~91%"
+  - "Built a cross-team QA knowledge hub that halved new-hire onboarding"
+  - "Caught a critical search-ranking defect using metamorphic testing on a GenAI assistant"
+  - "Blocked an unsafe feature launch, preventing broken payment handling and compliance gaps"
+  - "Owned release readiness for a new mobile app through App Store approval"
+  - "E2E/regression testing across 50+ device/OS configurations"
+  - "Found 40+ backend defects pre-release via API testing with Postman and DB CRUD validation"
+  - "Cut regression cycle time ~50% through risk-based test prioritization"
+
+# ----------------------------------------------------------
+# SIGNALS — what makes a job A-tier beyond skills
+# ----------------------------------------------------------
+boosts:
+  - "ai"                     # AI/LLM product companies
+  - "llm"
+  - "genai"
+  - "machine learning"
+  - "fintech"
+  - "healthtech"
+  - "founding"               # founding QA = ownership
+penalties:
+  - "clearance"              # security clearance
+  - "us citizen"
+  - "must relocate immediately without sponsorship"
+
+# ----------------------------------------------------------
+# REUSABLE APPLICATION ANSWERS — evidence-bounded, authored ONLY from the
+# achievements above. Served at /api/answers, shown in the dashboard draft
+# modal, and folded into the drafter prompt. Add/refine freely; no new facts.
+# ----------------------------------------------------------
+# EXAMPLE answers — rewrite in your own voice before using any of this.
+answers:
+  - question: "What are your core skills and competencies in QA?"
+    answer: >-
+      Manual-first software QA across web and mobile. Core: exploratory and
+      regression testing, test design, and API/DB verification (Postman, SQL).
+      Strong on GenAI/LLM products — I have caught critical defects with
+      metamorphic testing and cut a multi-agent orchestration bottleneck ~91%.
+      I use automation where it pays off, but I am a manual QA first.
+  - question: "Tell us about a challenging bug you found."
+    answer: >-
+      On a GenAI assistant I used metamorphic testing to catch a critical
+      search-ranking defect that conventional checks missed. Separately, I
+      diagnosed a multi-agent orchestration bottleneck and cut response latency
+      ~91% — the fix was in orchestration, not in the model.
+  - question: "Why are you a good fit for a remote role?"
+    answer: >-
+      I have led QA across multiple squads and worked directly with product,
+      engineering, and support in distributed setups. I am UTC+2, comfortable
+      overlapping EU and US hours, and work async-first with written handoffs.
+  - question: "What are your salary expectations?"
+    answer: >-
+      Targeting $2,500+/month and open depending on the role, seniority, and
+      whether it is contract or full-time. I care more about the product and the
+      team than squeezing the top of the band.

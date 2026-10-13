@@ -1,0 +1,97 @@
+# ============================================================
+# HydraHunt — main configuration
+# ============================================================
+
+app:
+  port: 8420                 # probed at startup; walks forward to 8429 if occupied
+  host: 127.0.0.1
+  db_path: data/jobhunt.db
+  log_dir: logs
+
+scheduler:
+  enabled: true
+  # two-tier cadence: cheap API sources sweep often, heavy scrapers stay polite
+  fast_interval_minutes: 30                 # ATS/RSS/rocketship/HN sweep
+  deep_interval_hours: 3                    # full scan incl. JobSpy + DorkLab (3h = safe on residential IP)
+  digest_times: ["09:00", "14:00", "19:00", "23:00"]  # skip-if-empty windows
+  dorklab_evolution_time: "10:00"           # daily evolution
+
+# ----------------------------------------------------------
+# COLLECTORS — toggle sources on/off
+# ----------------------------------------------------------
+collectors:
+  jobspy:
+    enabled: true
+    boards: [linkedin, indeed, google, zip_recruiter, bayt]
+    results_per_board: 50
+    hours_old: 72
+    search_terms:
+      - "QA Engineer remote"
+      - "Manual QA Engineer remote"
+      - "Software Tester remote"
+      - "Test Engineer remote"
+      - "Test Analyst remote"
+      - "QC Engineer remote"
+      - "Quality Assurance Engineer worldwide"
+      - "AI Quality Engineer"
+      - "LLM Quality Assurance"
+    country_indeed: ""       # empty = worldwide
+  remote_boards:
+    enabled: true
+    himalayas: true          # free JSON API + RSS
+    remotive: true           # free API
+    remoteok: true           # free JSON API
+    weworkremotely: true     # RSS
+    workingnomads: true      # RSS
+  ats_companies:
+    enabled: true
+    list_file: companies.yml
+  reddit:
+    enabled: true
+    subreddits: [QualityAssurance, softwaretesting, remotework, forhire, hiring, startups, SaaS]
+    flair_filter: [hiring]
+  hackernews:
+    enabled: true            # Algolia API, Who is Hiring threads
+  dorklab:
+    enabled: true
+    max_dorks_per_run: 8
+    seed_file: dorks/seed_dorks.yml
+  x_twitter:
+    enabled: true
+    mode: dorks_only         # burner_mode exists but OFF per user decision
+
+# ----------------------------------------------------------
+# LLM SCORING — free-model fallback chain
+# ----------------------------------------------------------
+llm:
+  providers:
+    - name: openrouter
+      base_url: https://openrouter.ai/api/v1
+      # free models ROTATE — refresh with: .venv\Scripts\python.exe scripts\update_models.py
+      models:
+        - nvidia/nemotron-3.5-lightning:free
+        - thinkingmachines/inkling:free
+        - google/gemma-4-31b-it:free
+        - nvidia/nemotron-3-super-120b-a12b:free
+        - openrouter/free
+      timeout_s: 60
+    - name: agnes
+      base_url: https://apihub.agnes-ai.com/v1
+      models:
+        - agnes-2.5-flash
+      timeout_s: 60
+  max_jobs_per_scan: 20      # only top rule-scored jobs hit the LLM
+  temperature: 0.1           # deterministic scoring
+
+# ----------------------------------------------------------
+# NOTIFICATIONS
+# ----------------------------------------------------------
+discord:
+  enabled: true
+  instant_tiers: [A]         # A-tier pings immediately
+  digest_tiers: [B]          # B-tier in daily digest
+  # C-tier = dashboard only
+
+dashboard:
+  auto_open: false
+  company_logos: clearbit    # clearbit logo API, favicon fallback

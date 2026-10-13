@@ -1,0 +1,63 @@
+# ============================================================
+# TARGET COMPANIES — polled directly via their ATS public APIs
+# Add/remove freely. ats: greenhouse | lever | ashby | workable
+# board_token = the company slug in their careers URL.
+# enabled: false = keep in list but stop polling.
+# ============================================================
+
+companies:
+  # --- QA/testing-native (always hiring QA) ---
+  - { name: BrowserStack, ats: greenhouse, board_token: browserstack }
+  - { name: LambdaTest, ats: greenhouse, board_token: lambdatest }
+  - { name: Katalon, ats: greenhouse, board_token: katalon }
+  - { name: Tricentis, ats: greenhouse, board_token: tricentis }
+  - { name: SmartBear, ats: greenhouse, board_token: smartbear }
+  - { name: mabl, ats: greenhouse, board_token: mabl }
+  - { name: Applitools, ats: lever, board_token: applitools }
+  - { name: Testlio, ats: greenhouse, board_token: testlio }
+  - { name: "Global App Testing", ats: greenhouse, board_token: globalapptesting }
+  - { name: Postman, ats: greenhouse, board_token: postman }
+  - { name: Sauce Labs, ats: greenhouse, board_token: saucelabs }
+
+  # --- Remote-from-anywhere (Egypt-compatible by policy) ---
+  - { name: GitLab, ats: greenhouse, board_token: gitlab }
+  - { name: Canonical, ats: greenhouse, board_token: canonical }
+  - { name: Automattic, ats: ashby, board_token: automattic }
+  - { name: Doist, ats: ashby, board_token: doist }
+  - { name: Zapier, ats: greenhouse, board_token: zapier }
+  - { name: Buffer, ats: ashby, board_token: buffer }
+  - { name: Deel, ats: greenhouse, board_token: deel }
+  - { name: "Remote.com", ats: greenhouse, board_token: remotecom }
+  # SafetyWing uses a custom careers page (no public ATS API) — disabled
+  - { name: SafetyWing, ats: ashby, board_token: safetywing, enabled: false }
+  - { name: Contra, ats: ashby, board_token: contra }
+  - { name: Invisible, ats: greenhouse, board_token: invisible }
+
+  # --- AI-product companies (matches GenAI-testing niche) ---
+  - { name: Anthropic, ats: greenhouse, board_token: anthropic }
+  - { name: Cohere, ats: ashby, board_token: cohere }
+  - { name: Scale AI, ats: greenhouse, board_token: scaleai }
+  # Hugging Face uses a custom jobs page (no public ATS API) — disabled
+  - { name: Hugging Face, ats: greenhouse, board_token: huggingface, enabled: false }
+  - { name: LangChain, ats: ashby, board_token: langchain }
+  - { name: ElevenLabs, ats: ashby, board_token: elevenlabs }
+  - { name: Perplexity, ats: ashby, board_token: perplexity }
+
+# Companies to never show (user blacklist, managed from dashboard)
+blacklist:
+  - Testlio        # talent-pool gig platform — blocked by user
+  - Applause       # same shit, different logo
+  - uTest          # Applause's gig brand
+
+# US-only employers — remote WITHIN the US or clearance-gated. User rule:
+# "remote from USA is BS". Postings may just say "Remote" with no clue;
+# the company itself is the tell. Add companies here as they surface.
+us_only:
+  - CACI                    # US defense contractor — clearance/US-citizen
+  - Koniag                  # US gov contractor (Alaska Native-owned)
+  - Amwell                  # US telehealth
+  - Geneoscopy              # US biotech
+  - Bright Vision Technologies
+  - Blueprint Technologies
+  - Ace IT Careers          # US staffing funnel for US employers
+  - Sargent & Lundy         # US nuclear/energy engineering

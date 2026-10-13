@@ -1,0 +1,36 @@
+# Secrets — NEVER commit
+.env
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Data — local DB stays local
+data/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Personal CV � stays local only
+*.pdf
+
+# Real candidate profile (the committed cv_profile.yml is example data).
+# Prefer this over editing the example so personal history stays untracked.
+profile/cv_profile.local.yml
