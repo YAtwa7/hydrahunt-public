@@ -48,6 +48,29 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     return data if isinstance(data, dict) else {}
 
 
+def _clean(value: str | None) -> str:
+    """Blank out the placeholder values shipped in `.env.example`.
+
+    Copying `.env.example` to `.env` verbatim is the documented setup step, and
+    it leaves real-looking-but-fake credentials behind:
+
+        DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
+
+    That string is non-empty, so every `if not value:` guard downstream passes
+    and the app actually POSTs to discord.com — which answers 405 on every scan.
+    Worse, the Discord notifier treats any HTTP response as "sent", so the jobs
+    in that scan get `notified_at` stamped and would never alert even after the
+    user pastes in a real webhook.
+
+    Treating `...` and `YOUR_` markers as unset makes the documented setup step
+    behave like the no-keys setup the README promises.
+    """
+    v = (value or "").strip()
+    if "..." in v or "YOUR_" in v.upper():
+        return ""
+    return v
+
+
 @dataclass
 class Settings:
     """Environment-backed secrets and host settings."""
@@ -66,13 +89,13 @@ class Settings:
     def from_env(cls, env_file: Path | None = None) -> Settings:
         load_dotenv(env_file or ROOT / ".env")
         return cls(
-            discord_webhook_url=os.getenv("DISCORD_WEBHOOK_URL", ""),
-            discord_bot_token=os.getenv("DISCORD_BOT_TOKEN", ""),
-            openrouter_api_key=os.getenv("OPENROUTER_API_KEY", ""),
-            agnes_api_key=os.getenv("AGNES_API_KEY", ""),
-            reddit_client_id=os.getenv("REDDIT_CLIENT_ID", ""),
-            reddit_client_secret=os.getenv("REDDIT_CLIENT_SECRET", ""),
-            reddit_user_agent=os.getenv("REDDIT_USER_AGENT", "hydrahunt/0.1"),
+            discord_webhook_url=_clean(os.getenv("DISCORD_WEBHOOK_URL", "")),
+            discord_bot_token=_clean(os.getenv("DISCORD_BOT_TOKEN", "")),
+            openrouter_api_key=_clean(os.getenv("OPENROUTER_API_KEY", "")),
+            agnes_api_key=_clean(os.getenv("AGNES_API_KEY", "")),
+            reddit_client_id=_clean(os.getenv("REDDIT_CLIENT_ID", "")),
+            reddit_client_secret=_clean(os.getenv("REDDIT_CLIENT_SECRET", "")),
+            reddit_user_agent=_clean(os.getenv("REDDIT_USER_AGENT", "")) or "hydrahunt/0.1",
             port=int(os.getenv("JOBHUNT_PORT", "8420")),
             host=os.getenv("JOBHUNT_HOST", "127.0.0.1"),
         )
